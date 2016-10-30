@@ -48,25 +48,25 @@ public class Karnaugh_map {
             System.out.print("Enter 1's Location (insert '-1' to stop input): ");
         }
 
-        index = 0;
-        System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
-        while ((x = scan.nextInt()) != -1) {
-            if (x > 3 && index == 0) {
-                index++;
-            }
-            if (x <= 3 && index == 1) {
-                index--;
-            }
-            if (kmap_3[index][x % 4] == 1 && x < 8) {
-                System.out.println("This location is occupied by 1's.\nTry again.");
-            }
-            if (x < 8) {
-                kmap_3[index][x % 4] = 2;
-            } else {
-                System.out.println("Invalid location.");
-            }
-            System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
-        }
+//        index = 0;
+//        System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
+//        while ((x = scan.nextInt()) != -1) {
+//            if (x > 3 && index == 0) {
+//                index++;
+//            }
+//            if (x <= 3 && index == 1) {
+//                index--;
+//            }
+//            if (kmap_3[index][x % 4] == 1 && x < 8) {
+//                System.out.println("This location is occupied by 1's.\nTry again.");
+//            }
+//            if (x < 8) {
+//                kmap_3[index][x % 4] = 2;
+//            } else {
+//                System.out.println("Invalid location.");
+//            }
+//            System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
+//        }
 
         map_clone = map.clone();
     }
@@ -170,23 +170,22 @@ public class Karnaugh_map {
                     if (map_clone[i] && map[i + 4] && i < 3) {
                         solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i + 4]));
 //                        map_clone[i] = false;
-                        map_clone[i + 4] = false;
+//                        map_clone[i + 4] = false;
                     }
                 }
             } else if (i == 1 || i == 5) {
                 if(map_clone[i] && !map[i+2] && !map[i+4]){
                     solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i]));
                 }else {
-                    if (map_clone[i] && map_clone[i + 4] && i < 4) {
-                        solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i + 4]));
-//                        map_clone[i] = false;
-                        map_clone[i + 4] = false;
-                    }
-
                     if (map_clone[i] && map[i + 2]) {
                         solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i + 2]));
 //                        map_clone[i] = false;
-//                        map_clone[i + 2] = false;
+                        map_clone[i + 2] = false;
+                    }
+                    if (map_clone[i] && map_clone[i + 4] && i < 4) {
+                        solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i + 4]));
+//                        map_clone[i] = false;
+//                        map_clone[i + 4] = false;
                     }
                 }
             } else {
@@ -195,13 +194,11 @@ public class Karnaugh_map {
                 }else {
                     if (map_clone[i] && map[i + 1] && i!=3) {
                         solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i + 1]));
-//                        map_clone[i] = false;
-//                        map_clone[i + 1] = false;
                     }
                     if (i < 4 && map_clone[i] && map_clone[i + 4]) {
                         solutions.addElement(convertToVar(bit_string_3[i], bit_string_3[i + 4]));
 //                        map_clone[i] = false;
-                        map_clone[i + 4] = false;
+//                        map_clone[i + 4] = false;
                     }
                 }
             }
