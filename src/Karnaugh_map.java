@@ -115,6 +115,13 @@ public class Karnaugh_map {
 //
 //    }
 
+    /**
+     * Method : k_map_solver_three
+     * Details: Karnaugh Map solver for Three Variable's
+     *
+     * Currently this method does not take any input parameter as Variable "map" is declared as global variable.
+     *
+     */
     void k_mapSolver_three() { // K-map 3 variable soluion.
 
         if (map[0] && map[1] && map[2] && map[3]) { // {0,1,2,3}
@@ -206,6 +213,9 @@ public class Karnaugh_map {
         }
     }
 
+    /**
+     * Shows the generated solution.
+     */
     protected void showResult() {
         boolean i =false;
         System.out.print("\n\n Solution (SOP): ");
@@ -215,6 +225,9 @@ public class Karnaugh_map {
         }
     }
 
+    /**
+     * Shows Karnaugh Map as truth table
+     */
     public void showKmap(){
         System.out.println("");
         for (int i = 0; i < map.length/2 ; i++) {
@@ -231,6 +244,28 @@ public class Karnaugh_map {
         }
     }
 
+    /**
+     * Method : ConverttToString
+     *
+     * This method takes two string's value as parameter.
+     * parameter Strings contains binary digits for comparison.
+     * this method will compare all the bit's one by one
+     * if the bit matches then will be convert to Variable form like A,B,C
+     * this method also checks if the common bit is '0' Or '1'
+     * if common bit is '1' then solution will be A OR B OR C
+     * if common bit is '0' then solution will be A' OR B' OR C'
+     * here ['] means not. like A' = !A = A(not)
+     *
+     *
+     * There is 3 case scenerio's :
+     *                              1. at least 1 bit is common where group of 4 minterm's is present.
+     *                              2. at least 2 bit's are common where pair of 2 minterm's is present.
+     *                              3. all 3 bit's are common where any pair or group is not present.
+     *
+     * @param s
+     * @param s3
+     * @return solution
+     */
     private String convertToVar(String s, String s3) {
         String solution = "";
 
