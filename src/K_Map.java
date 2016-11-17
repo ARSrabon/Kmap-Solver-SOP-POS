@@ -20,6 +20,7 @@ public class K_Map {
 //                my_map.test_run();
                 my_map.k_mapSolver_three();
                 my_map.showResult();
+                my_map.showKmap();
                 break;
             case 3:
                 break;

@@ -8,13 +8,13 @@ import java.util.Vector;
 public class Karnaugh_map {
 
     final String[] bit_string_3 = {"000", "001", "010", "011", "100", "101", "110", "111"};
-    final String[] bit_string_4 = {"0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"};
+//    final String[] bit_string_4 = {"0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"};
 
     boolean[] map = new boolean[16];
     boolean[] map_clone;
 
     final int[][] kmap_3 = new int[2][4];
-    final int[][] kmap_4 = new int[4][4];
+//    final int[][] kmap_4 = new int[4][4];
 
     Vector solutions = new Vector();
 
@@ -31,7 +31,8 @@ public class Karnaugh_map {
         Scanner scan = new Scanner(System.in);
         int x;
         int index = 0;
-        System.out.print("Enter 1's Location (insert '-1' to stop input): ");
+        System.out.println("Insert '-1' to stop input");
+        System.out.print("Enter minterm's(1's) Location : ");
         while ((x = scan.nextInt()) != -1) {
             if (x > 3 && index == 0) {
                 index++;
@@ -71,48 +72,48 @@ public class Karnaugh_map {
         map_clone = map.clone();
     }
 
-    void initiate_Kmap_4() {
-        Scanner scan = new Scanner(System.in);
-        int x;
-        int index = 0;
-        System.out.print("Enter 1's Location (insert '-1' to stop input): ");
-        while ((x = scan.nextInt()) != -1) {
-            if (x > 3 && index == 0) {
-                index++;
-            }
-            if (x <= 3 && index == 1) {
-                index--;
-            }
-            if (x < 8) {
-                map[x] = true;
-                kmap_3[index][x % 4] = 1;
-            } else {
-                System.out.println("Invalid location.");
-            }
-            System.out.print("Enter 1's Location (insert '-1' to stop input): ");
-        }
-
-        index = 0;
-        System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
-        while ((x = scan.nextInt()) != -1) {
-            if (x > 3 && index == 0) {
-                index++;
-            }
-            if (x <= 3 && index == 1) {
-                index--;
-            }
-            if (kmap_3[index][x % 4] == 1 && x < 8) {
-                System.out.println("This location is occupied by 1's.\nTry again.");
-            }
-            if (x < 8) {
-                kmap_3[index][x % 4] = 2;
-            } else {
-                System.out.println("Invalid location.");
-            }
-            System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
-        }
-
-    }
+//    void initiate_Kmap_4() {
+//        Scanner scan = new Scanner(System.in);
+//        int x;
+//        int index = 0;
+//        System.out.print("Enter 1's Location (insert '-1' to stop input): ");
+//        while ((x = scan.nextInt()) != -1) {
+//            if (x > 3 && index == 0) {
+//                index++;
+//            }
+//            if (x <= 3 && index == 1) {
+//                index--;
+//            }
+//            if (x < 8) {
+//                map[x] = true;
+//                kmap_3[index][x % 4] = 1;
+//            } else {
+//                System.out.println("Invalid location.");
+//            }
+//            System.out.print("Enter 1's Location (insert '-1' to stop input): ");
+//        }
+//
+//        index = 0;
+//        System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
+//        while ((x = scan.nextInt()) != -1) {
+//            if (x > 3 && index == 0) {
+//                index++;
+//            }
+//            if (x <= 3 && index == 1) {
+//                index--;
+//            }
+//            if (kmap_3[index][x % 4] == 1 && x < 8) {
+//                System.out.println("This location is occupied by 1's.\nTry again.");
+//            }
+//            if (x < 8) {
+//                kmap_3[index][x % 4] = 2;
+//            } else {
+//                System.out.println("Invalid location.");
+//            }
+//            System.out.print("Enter Don't care Location (insert '-1' to stop input): ");
+//        }
+//
+//    }
 
     void k_mapSolver_three() { // K-map 3 variable soluion.
 
@@ -212,7 +213,22 @@ public class Karnaugh_map {
             System.out.print((i) ? " + " + solution.toString() : solution.toString());
             i = true;
         }
+    }
+
+    public void showKmap(){
         System.out.println("");
+        for (int i = 0; i < map.length/2 ; i++) {
+            if (i==4){
+                System.out.println("");
+            }
+            if (i == 2 || i== 6){
+                System.out.print(map[i+1] + " ");
+            }else if(i==3 || i==7){
+                System.out.print(map[i-1] + " ");
+            }else {
+                System.out.print(map[i] + " ");
+            }
+        }
     }
 
     private String convertToVar(String s, String s3) {
